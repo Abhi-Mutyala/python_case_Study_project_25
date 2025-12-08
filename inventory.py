@@ -1,0 +1,158 @@
+# inventory management system 
+import time_pr as t
+import datetime
+
+def inv_view(dic_invent):
+    print("welcome to the inventort management project")
+    print(dic_invent)
+    
+    
+def inv_add(dic_invent):
+    name=input("Enter the name of the inventory:")
+    quan=int(input("Enter the quantity of item:"))
+    price=float(input("Enter the price of the inventory:"))
+    tim=t.cd
+    tt=str(tim)
+    dic_invent[name]=[price,quan,tim]
+    print("The item is successfully added to the inventory")
+    return dic_invent
+
+def inv_sell(dic_invent,dic_trans,cus_tra):
+    temp_dic={}
+    bill=0
+    cname=input("please enter your name:")
+    while(1):
+        n=int(input("Enter the name of the inventory(give 1 to buy,2 to get the bill):"))
+        if(n==1):
+            name=input("Enter the name of inventory:")
+            if name in dic_invent:
+                quan=int(input("Enter the quantity of inventory:"))
+                if(quan<=dic_invent[name][1]):
+                    bill=bill+quan*dic_invent[name][0]  
+                    dic_invent[name][1]=dic_invent[name][1]-quan
+                    dic_trans[name]=[dic_invent[name][0],quan,t.ct]
+                    temp_dic[name]=[dic_invent[name][0],quan,t.ct]
+            else:
+                print("The inventory doesnot present in the stock")                    
+        elif(n==2):
+            c=temp_dic.copy()
+            cus_tra[cname]=c
+            temp_dic={}
+            print("your total bill is:",bill)
+            print(c)
+            break
+    return dic_invent,cus_tra
+        
+        
+def inv_tran(dic_trans,cus_tra):
+    print("The transaction history is :",dic_trans)
+    print("The transaction history with the customers is:",cus_tra)
+
+
+def inv_update(dic_invent):
+    name=input("Enter the name of the inventory:")
+    if name in dic_invent:
+        print("The quantity of the",name,"is",dic_invent[name][1])
+        q=int(input("enter the new quantity:"))
+        dic_invent[name][1]= q
+    else:
+        print("the item with given name was not present")
+    return dic_invent
+                    
+def inv_changeprice(dic_invent):
+    name=input("enter the product name:")
+    if name in dic_invent:
+        np=float(input("Enter the new price of the inventory:"))
+        dic_invent[name][0]=np
+    else:
+        print("The given item was not present in the inventories")
+    return dic_invent
+
+def inv_rename(dic_invent):
+    name=input("Enter the name of the inventory")
+    if name in dic_invent:
+        nn=input("enter the new name of the inventory:")
+        c=dic_invent.copy()
+        dic_invent[nn]=c[name]
+        dic_invent[nn][2]=t.cd
+        del dic_invent[name]
+        print("The item was successfully renamed")
+    else:
+        print("The item was not present")
+    return dic_invent
+        
+def inv_remove(dic_invent):
+    name=input("Enter the name of the inventory:")
+    if name in dic_invent:
+        del dic_invent[name]
+        print("The item was removed")
+    else:
+        print("the item was not present")
+    return dic_invent
+    
+    
+def main():
+    file=open(r"C:\Users\ABHILASH\Music\totinv.txt",'r')
+    ne=file.read()
+    dic_invent=eval(ne)
+    file.close()
+            
+    file1=open(r"C:\Users\ABHILASH\Music\tottra.txt",'r')
+    nn=file1.read()
+    dic_tra=eval(nn)
+    file1.close()
+            
+    file2=open(r"C:\Users\ABHILASH\Music\totcus.txt",'r')
+    nnn=file2.read()
+    cus_tra=eval(nnn)
+    file2.close()
+    
+    while(1):
+        print("\n")
+        print("1-view the inventory")
+        print("2-add inventory")
+        print("3-sell items")
+        print("4-view transction history")
+        print("5-update quantity")
+        print("6-change price")
+        print("7-rename an item")
+        print("8-remove item")
+        print("9-exit\n")
+        a=int(input("Enter the number for which you want:"))
+        
+        
+        if(a==1):
+            inv_view(dic_invent)
+        elif(a==2):
+            inv_add(dic_invent)
+        elif(a==3):
+            (inv_sell(dic_invent,dic_tra,cus_tra))
+        elif(a==4):
+            inv_tran(dic_tra,cus_tra)
+        elif(a==5):
+            inv_update(dic_invent)
+        elif(a==6):
+            inv_changeprice(dic_invent)
+        elif(a==7):
+            inv_rename(dic_invent)
+        elif(a==8):
+            inv_remove(dic_invent)
+        elif(a==9):
+            file=open(r"C:\Users\ABHILASH\Music\totinv.txt",'w')
+            dd=str(dic_invent)
+            file.write(dd)
+            file.close()
+            
+            file1=open(r"C:\Users\ABHILASH\Music\tottra.txt",'w')
+            dd=str(dic_tra)
+            file1.write(dd)
+            file1.close()
+            
+            file2=open(r"C:\Users\ABHILASH\Music\totcus.txt",'w')
+            dd=str(cus_tra)
+            file2.write(dd)
+            file2.close()
+            
+            break
+main()
+    
