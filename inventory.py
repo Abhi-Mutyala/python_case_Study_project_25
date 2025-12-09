@@ -4,23 +4,41 @@ import datetime
 
 def inv_view(dic_invent):
     print("welcome to the inventort management project")
-    print(dic_invent)
-    
+    for i in dic_invent:
+        print(i,'-',dic_invent[i][0],'-rupees',',quantity-',dic_invent[i][1],',date-',dic_invent[i][2])
+        print("\n")
+
     
 def inv_add(dic_invent):
-    name=input("Enter the name of the inventory:")
-    quan=int(input("Enter the quantity of item:"))
-    price=float(input("Enter the price of the inventory:"))
-    tim=t.cd
-    tt=str(tim)
-    dic_invent[name]=[price,quan,tim]
-    print("The item is successfully added to the inventory")
-    return dic_invent
+    name=input("Enter the name of the inventory(press space to go back):")
+    if(name==' '):
+        pass
+    else:
+        if(name.isdigit()==True):
+            print("item name cannot be in digits")
+        else:
+            if(name[0].isupper==True):
+                quan=int(input("Enter the quantity of item:"))
+                price=float(input("Enter the price of the inventory:"))
+                tim=t.cd
+                tt=str(tim)
+                dic_invent[name]=[price,quan,tim]
+                print("The item is successfully added to the inventory")
+            else:
+                r=name[0].upper()+name[1:]
+                quan=int(input("Enter the quantity of item:"))
+                price=float(input("Enter the price of the inventory:"))
+                tim=t.cd
+                tt=str(tim)
+                dic_invent[r]=[price,quan,tim]
+                print("The item is successfully added to the inventory")
+   
 
 def inv_sell(dic_invent,dic_trans,cus_tra):
     temp_dic={}
     bill=0
     cname=input("please enter your name:")
+    
     while(1):
         n=int(input("Enter the name of the inventory(give 1 to buy,2 to get the bill):"))
         if(n==1):
@@ -50,48 +68,63 @@ def inv_tran(dic_trans,cus_tra):
 
 
 def inv_update(dic_invent):
-    name=input("Enter the name of the inventory:")
-    if name in dic_invent:
-        print("The quantity of the",name,"is",dic_invent[name][1])
-        q=int(input("enter the new quantity:"))
-        dic_invent[name][1]= q
+    name=input("Enter the name of the inventory(press space to go back):")
+    if(name==' '):
+        pass
     else:
-        print("the item with given name was not present")
-    return dic_invent
+        if name in dic_invent:
+            print("The quantity of the",name,"is",dic_invent[name][1])
+            q=int(input("enter the new quantity:"))
+            dic_invent[name][1]= q
+        else:
+            print("the item with given name was not present")
                     
 def inv_changeprice(dic_invent):
-    name=input("enter the product name:")
-    if name in dic_invent:
-        np=float(input("Enter the new price of the inventory:"))
-        dic_invent[name][0]=np
+    name=input("enter the product name(press space to go back):")
+    if (name==' '):
+        pass
     else:
-        print("The given item was not present in the inventories")
-    return dic_invent
+        if name in dic_invent:
+            np=float(input("Enter the new price of the inventory:"))
+            dic_invent[name][0]=np
+        else:
+            print("The given item was not present in the inventories")
+    
+    
 
 def inv_rename(dic_invent):
-    name=input("Enter the name of the inventory")
-    if name in dic_invent:
-        nn=input("enter the new name of the inventory:")
-        c=dic_invent.copy()
-        dic_invent[nn]=c[name]
-        dic_invent[nn][2]=t.cd
-        del dic_invent[name]
-        print("The item was successfully renamed")
+    name=input("Enter the name of the inventory(press space to go back)")
+    if (name==' '):
+        pass
     else:
-        print("The item was not present")
-    return dic_invent
+        if name in dic_invent:
+            nn=input("enter the new name of the inventory:")
+            c=dic_invent.copy()
+            dic_invent[nn]=c[name]
+            dic_invent[nn][2]=t.cd
+            del dic_invent[name]
+            print("The item was successfully renamed")
+        else:
+            print("The item was not present")
+    
+    
         
 def inv_remove(dic_invent):
-    name=input("Enter the name of the inventory:")
-    if name in dic_invent:
-        del dic_invent[name]
-        print("The item was removed")
+    name=input("Enter the name of the inventory(press space to go back):")
+    if (name==' '):
+        pass
     else:
-        print("the item was not present")
-    return dic_invent
+        if name in dic_invent:
+            del dic_invent[name]
+            print("The item was removed")
+        else:
+            print("the item was not present")
+   
+    
     
     
 def main():
+    
     file=open(r"C:\Users\ABHILASH\Music\totinv.txt",'r')
     ne=file.read()
     dic_invent=eval(ne)
@@ -109,16 +142,24 @@ def main():
     
     while(1):
         print("\n")
-        print("1-view the inventory")
-        print("2-add inventory")
-        print("3-sell items")
-        print("4-view transction history")
-        print("5-update quantity")
-        print("6-change price")
-        print("7-rename an item")
-        print("8-remove item")
+        print("\t\t\t\t*****************************************************************************")
+        print("\n")
+        print("\t\t\t\t---------------Welcome to inventory management system------------------------")
+        print("\n")
+        print("\t\t\t\t----------------------Developed by Group - 5---------------------------------")
+        print("\n")
+        print("\t\t\t\t*****************************************************************************")
+        print("MENU:-")
+        print("1-View inventory")
+        print("2-Add to inventory")
+        print("3-Sell items")
+        print("4-View transction history")
+        print("5-Update quantity")
+        print("6-Change the price of the item")
+        print("7-Rename an item")
+        print("8-Remove an item")
         print("9-exit\n")
-        a=int(input("Enter the number for which you want:"))
+        a=int(input("Select an option from the Menu:"))
         
         
         if(a==1):
@@ -154,5 +195,4 @@ def main():
             file2.close()
             
             break
-main()
-    
+main()    
