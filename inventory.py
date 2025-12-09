@@ -125,17 +125,17 @@ def inv_remove(dic_invent):
     
 def main():
     
-    file=open(r"C:\Users\ABHILASH\Music\totinv.txt",'r')
+    file=open(r"C:\Users\ABHILASH\Music\tot_inv.txt",'r')
     ne=file.read()
     dic_invent=eval(ne)
     file.close()
             
-    file1=open(r"C:\Users\ABHILASH\Music\tottra.txt",'r')
+    file1=open(r"C:\Users\ABHILASH\Music\tot_tra.txt",'r')
     nn=file1.read()
     dic_tra=eval(nn)
     file1.close()
             
-    file2=open(r"C:\Users\ABHILASH\Music\totcus.txt",'r')
+    file2=open(r"C:\Users\ABHILASH\Music\tot_cus.txt",'r')
     nnn=file2.read()
     cus_tra=eval(nnn)
     file2.close()
@@ -153,7 +153,7 @@ def main():
         print("1-View inventory")
         print("2-Add to inventory")
         print("3-Sell items")
-        print("4-View transction history")
+        print("4-View transaction history")
         print("5-Update quantity")
         print("6-Change the price of the item")
         print("7-Rename an item")
@@ -179,17 +179,17 @@ def main():
         elif(a==8):
             inv_remove(dic_invent)
         elif(a==9):
-            file=open(r"C:\Users\ABHILASH\Music\totinv.txt",'w')
+            file=open(r"C:\Users\ABHILASH\Music\tot_inv.txt",'w')
             dd=str(dic_invent)
             file.write(dd)
             file.close()
             
-            file1=open(r"C:\Users\ABHILASH\Music\tottra.txt",'w')
+            file1=open(r"C:\Users\ABHILASH\Music\tot_tra.txt",'w')
             dd=str(dic_tra)
             file1.write(dd)
             file1.close()
             
-            file2=open(r"C:\Users\ABHILASH\Music\totcus.txt",'w')
+            file2=open(r"C:\Users\ABHILASH\Music\tot_cus.txt",'w')
             dd=str(cus_tra)
             file2.write(dd)
             file2.close()
