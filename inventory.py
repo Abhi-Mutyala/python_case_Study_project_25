@@ -40,7 +40,7 @@ def inv_sell(dic_invent,dic_trans,cus_tra):
     cname=input("please enter your name:")
     
     while(1):
-        n=int(input("Enter the name of the inventory(give 1 to buy,2 to get the bill):"))
+        n=int(input("Enter the name of the inventory(Select 1 to buy or 2 to get the bill):"))
         if(n==1):
             name=input("Enter the name of inventory:")
             if name in dic_invent:
